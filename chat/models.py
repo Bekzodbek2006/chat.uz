@@ -11,6 +11,7 @@ class Chat(models.Model):
     author = models.ForeignKey(CustomeUser, on_delete=models.CASCADE)
     entry = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
+    msg = models.CharField(max_length=10)
 
     def __str__(self):
         return f"Chat id - {self.pk}"

@@ -5,5 +5,6 @@ app_name = "chat"
 
 urlpatterns = [
     path("", home, name="home"),
-    path("<slug:slug>/", chat, name="chat")
+    path("c/<slug:slug>/", ChatView, name="chat"),
+    path("chat-msg/", ChatMsgApiView, name="chat_msg")
 ]
