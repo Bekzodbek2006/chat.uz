@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{chat.msg}}</title>
 </head>
+
 <body>
     {{ chat.author }}
     {{ chat.id }}
     {{ chat.entry }}
+
+    <script>
+        const api_url = `/chat-msg`;
+
+        // Defining async function
+        async function getapi(url) {
+
+            // Storing response
+            const response = await fetch(url);
+
+            // Storing data in form of JSON
+            var data = await response.json();
+            // if (response) {
+            //     // hideloader();
+            // }
+            show(data)
+            
+        }
+        // Calling that async function
+        getapi(api_url);
+
+        // function hideloader() {
+        //     console.log("secces");
+        // }
+
+        function show(data) {
+            // if (data.chat === 2){
+            //     console.log(data);
+            // }
+            console.log(data[1].chat);
+        }
+    </script>
 </body>
+
 </html>
