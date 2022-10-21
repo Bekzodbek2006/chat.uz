@@ -9,6 +9,12 @@
 </head>
 
 <body>
+
+    <style>
+        tab {
+            display: block;
+        }
+    </style>
     {{ chat.author }}
     {{ chat.id }}
     {{ chat.entry }}
@@ -16,51 +22,51 @@
     <div id="employees"></div>
 
     <script>
-
+        let tab = document.getElementById("employees")
 
         // api url
         const api_url = "/chat-msg";
 
-        // Defining async function
-        async function getapi(url) {
+        
+            async function getapi(url) {
 
-            // Storing response
-            const response = await fetch(url);
+                // Storing response
 
-            // Storing data in form of JSON
-            var data = await response.json();
-            console.log(data);
-            if (response) {
-                hideloader();
+                const response = await fetch(url);
+
+
+                // Storing data in form of JSON
+                var data = await response.json();
+                console.log(data);
+                if (response) {
+                    hideloader();
+                }
+                show(data);
+               
             }
-            show(data);
-        }
-        // Calling that async function
-        getapi(api_url);
+            
+            // Calling that async function
+      setInterval(() => {
+        
+          getapi(api_url)
+    }, 10);
+        
 
         // Function to hide the loader
         function hideloader() {
-            // document.getElementById('loading').style.display = 'none';
         }
-        // Function to define innerHTML for HTML table
-        function show(data) {
-            let tab =
-                `<tr>
-          <th>author_id:</th>
-          <th>chat:</th>
-    
-         </tr>`;
 
-            // Loop to access all rows 
+        function show(data) {
+
             for (let r of data) {
-                tab += `<tr> 
-                    <td>${r.author}</td>
-                    <td>${r.chat} </td>       
-            </tr>`;
+                if (r.chat == 3) {
+                    tab.innerHTML = `${r.message} `
+                }
             }
-            // Setting innerHTML as tab variable
-            document.getElementById("employees").innerHTML = tab;
+           
         }
+
+
     </script>
 </body>
 
