@@ -13,8 +13,13 @@
     {{ chat.id }}
     {{ chat.entry }}
 
+    <div id="employees"></div>
+
     <script>
-        const api_url = `/chat-msg`;
+
+
+        // api url
+        const api_url = "/chat-msg";
 
         // Defining async function
         async function getapi(url) {
@@ -24,24 +29,37 @@
 
             // Storing data in form of JSON
             var data = await response.json();
-            // if (response) {
-            //     // hideloader();
-            // }
-            show(data)
-            
+            console.log(data);
+            if (response) {
+                hideloader();
+            }
+            show(data);
         }
         // Calling that async function
         getapi(api_url);
 
-        // function hideloader() {
-        //     console.log("secces");
-        // }
-
+        // Function to hide the loader
+        function hideloader() {
+            // document.getElementById('loading').style.display = 'none';
+        }
+        // Function to define innerHTML for HTML table
         function show(data) {
-            // if (data.chat === 2){
-            //     console.log(data);
-            // }
-            console.log(data[1].chat);
+            let tab =
+                `<tr>
+          <th>author_id:</th>
+          <th>chat:</th>
+    
+         </tr>`;
+
+            // Loop to access all rows 
+            for (let r of data) {
+                tab += `<tr> 
+                    <td>${r.author}</td>
+                    <td>${r.chat} </td>       
+            </tr>`;
+            }
+            // Setting innerHTML as tab variable
+            document.getElementById("employees").innerHTML = tab;
         }
     </script>
 </body>
